@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% set active_page = "books" %}
+{% from "delete_modal.html" import show_delete_modal%}
+{% from "view_book_modal.html" import book_details_modal %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="btn-group my-3 col-8" role="group" aria-label="User Actions">
+            <button type="button" id="viewDetails" class="btn btn-secondary" disabled data-toggle="modal" data-target="#viewBookDetails"> View Details</button>
+            <a id="create" href="{{url_for('books.create_book')}}" class="btn btn-secondary">Create</a>
+            <button type="button" id="edit" class="btn btn-secondary" disabled>Edit</button>
+            <button type="button" id="delete" class="btn btn-secondary" disabled data-toggle="modal" data-target="#deleteModal" data-page="Book">Delete</button>
+        </div>
+        <div class="col-4 my-3">
+            <input type="search" id="searchField" value="" class="form-control" placeholder="Search">
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <table class="table table-hover" id="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col" style="width: 10%">#</th>
+            <th scope="col" style="width: 45%">Book Name</th>
+            <th scope="col" style="width: 45%">Book Author</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%for book in all_books %}
+        <tr class="clickable-row" id="{{book.id}}" data-hidden="true" data-book='{{book|to_json}}'  data-id="{{book.id}}">
+            <th scope="row">{{loop.index}}</th>
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{{show_delete_modal()}}
+{{book_details_modal()}}
+{%endblock content%}
