@@ -1,5 +1,5 @@
 # Description
-A basic UI app created to consume the REST API service created in the python-library-backend repository.
+A basic UI app created to consume the REST API service created in the python-library-backend repository (https://github.com/rarestomos/python-library-backend).
 
 It is a basic UI app created using Bootstrap and Flask so that it can be easily tested using automation for learning
 purposes
